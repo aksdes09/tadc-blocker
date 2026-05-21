@@ -1,0 +1,29 @@
+{
+  "ext_name": { "message": "TADC Blocker" },
+  "ext_description": {
+    "message": "Bloque le contenu de The Amazing Digital Circus"
+  },
+  "header_sub": { "message": "Bloqueur The Amazing Digital Circus" },
+  "main_toggle": { "message": "Blocage activé" },
+  "section_what": { "message": "Que bloquer" },
+  "opt_pages": { "message": "Pages et liens" },
+  "opt_images": { "message": "Images" },
+  "opt_videos": { "message": "Vidéo / iframe" },
+  "opt_showblocked": { "message": "Page de blocage" },
+  "section_keywords": { "message": "Mots-clés personnalisés" },
+  "kw_placeholder": { "message": "Ajouter un mot..." },
+  "btn_save": { "message": "Enregistrer" },
+  "btn_saved": { "message": "✓ Enregistré" },
+  "status_active": { "message": "● Actif" },
+  "status_off": { "message": "○ Désactivé" },
+  "blocked_title": { "message": "Page bloquée" },
+  "blocked_heading": { "message": "Contenu bloqué" },
+  "blocked_body": {
+    "message": "Cette page contient du contenu lié à The Amazing Digital Circus et a été bloquée par TADC Blocker."
+  },
+  "btn_back": { "message": "← Retour" },
+  "btn_settings": { "message": "Paramètres" },
+  "blocked_footer": { "message": "TADC Blocker · Filtrage de contenu actif" },
+  "blocked_text": { "message": "[TADC bloqué]" },
+  "placeholder_text": { "message": "🚫 Bloqué" }
+}

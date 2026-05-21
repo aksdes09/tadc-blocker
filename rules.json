@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "*amazingdigitalcircus*",
+      "resourceTypes": ["main_frame", "sub_frame", "image", "media", "xmlhttprequest", "script", "stylesheet", "font", "other"]
+    }
+  },
+  {
+    "id": 2,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "*amazing-digital-circus*",
+      "resourceTypes": ["main_frame", "sub_frame", "image", "media", "xmlhttprequest", "script", "stylesheet", "font", "other"]
+    }
+  },
+  {
+    "id": 3,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "*digital-circus*",
+      "resourceTypes": ["main_frame", "sub_frame"]
+    }
+  }
+]

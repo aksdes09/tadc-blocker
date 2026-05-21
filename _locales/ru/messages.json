@@ -1,0 +1,29 @@
+{
+  "ext_name": { "message": "TADC Blocker" },
+  "ext_description": {
+    "message": "Блокирует контент The Amazing Digital Circus"
+  },
+  "header_sub": { "message": "Блокировщик The Amazing Digital Circus" },
+  "main_toggle": { "message": "Блокировка включена" },
+  "section_what": { "message": "Что блокировать" },
+  "opt_pages": { "message": "Страницы и ссылки" },
+  "opt_images": { "message": "Изображения" },
+  "opt_videos": { "message": "Видео / iframe" },
+  "opt_showblocked": { "message": "Страница блокировки" },
+  "section_keywords": { "message": "Свои ключевые слова" },
+  "kw_placeholder": { "message": "Добавить слово..." },
+  "btn_save": { "message": "Сохранить" },
+  "btn_saved": { "message": "✓ Сохранено" },
+  "status_active": { "message": "● Активен" },
+  "status_off": { "message": "○ Выключен" },
+  "blocked_title": { "message": "Страница заблокирована" },
+  "blocked_heading": { "message": "Контент заблокирован" },
+  "blocked_body": {
+    "message": "Эта страница содержит контент, связанный с The Amazing Digital Circus, и была заблокирована расширением TADC Blocker."
+  },
+  "btn_back": { "message": "← Назад" },
+  "btn_settings": { "message": "Настройки" },
+  "blocked_footer": { "message": "TADC Blocker · Фильтрация контента активна" },
+  "blocked_text": { "message": "[TADC заблокировано]" },
+  "placeholder_text": { "message": "🚫 Заблокировано" }
+}
