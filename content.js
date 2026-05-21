@@ -1,11 +1,14 @@
 (function () {
   const TADC_KEYWORDS = [
+    "the amazing digital circus",
+    "theamazingdigitalcircus",
+    "the-amazing-digital-circus",
     "amazing digital circus",
     "amazingdigitalcircus",
     "amazing-digital-circus",
     "pomni",
-    "caine the ringmaster",
-    "jax tadc",
+    "caine",
+    "jax",
     "gangle",
     "kinger",
     "ragatha",
@@ -20,17 +23,19 @@
     blockVideos: true,
     blockPages: true,
     showBlockedPage: true,
-    customKeywords: []
+    customKeywords: [],
   };
 
   function getAllKeywords() {
-    return [...TADC_KEYWORDS, ...(settings.customKeywords || [])].map(k => k.toLowerCase());
+    return [...TADC_KEYWORDS, ...(settings.customKeywords || [])].map((k) =>
+      k.toLowerCase(),
+    );
   }
 
   function containsTADC(text) {
     if (!text) return false;
     const lower = text.toLowerCase();
-    return getAllKeywords().some(kw => lower.includes(kw));
+    return getAllKeywords().some((kw) => lower.includes(kw));
   }
 
   function isTADCUrl(url) {
@@ -38,8 +43,8 @@
     return containsTADC(url);
   }
 
-  function makeBlockedPlaceholder(type = 'content') {
-    const el = document.createElement('div');
+  function makeBlockedPlaceholder(type = "content") {
+    const el = document.createElement("div");
     el.style.cssText = `
       display: inline-flex;
       align-items: center;
@@ -59,21 +64,21 @@
       min-width: 60px;
       min-height: 36px;
     `;
-    el.textContent = chrome.i18n.getMessage('placeholder_text') || '🚫 Blocked';
-    el.title = 'Контент TADC заблокирован';
+    el.textContent = chrome.i18n.getMessage("placeholder_text") || "🚫 Blocked";
+    el.title = "Контент TADC заблокирован";
     return el;
   }
 
   function processImages() {
     if (!settings.blockImages) return;
-    document.querySelectorAll('img').forEach(img => {
-      const src = img.src || img.getAttribute('src') || '';
-      const alt = img.alt || '';
-      const dataSrc = img.getAttribute('data-src') || '';
+    document.querySelectorAll("img").forEach((img) => {
+      const src = img.src || img.getAttribute("src") || "";
+      const alt = img.alt || "";
+      const dataSrc = img.getAttribute("data-src") || "";
       if (isTADCUrl(src) || isTADCUrl(dataSrc) || containsTADC(alt)) {
-        const placeholder = makeBlockedPlaceholder('image');
-        placeholder.style.width = (img.width || 100) + 'px';
-        placeholder.style.height = (img.height || 60) + 'px';
+        const placeholder = makeBlockedPlaceholder("image");
+        placeholder.style.width = (img.width || 100) + "px";
+        placeholder.style.height = (img.height || 60) + "px";
         img.replaceWith(placeholder);
       }
     });
@@ -81,25 +86,25 @@
 
   function processVideos() {
     if (!settings.blockVideos) return;
-    document.querySelectorAll('video, iframe').forEach(el => {
-      const src = el.src || el.getAttribute('src') || '';
-      const title = el.title || el.getAttribute('title') || '';
+    document.querySelectorAll("video, iframe").forEach((el) => {
+      const src = el.src || el.getAttribute("src") || "";
+      const title = el.title || el.getAttribute("title") || "";
       if (isTADCUrl(src) || containsTADC(title)) {
-        const placeholder = makeBlockedPlaceholder('video');
-        placeholder.style.width = (el.offsetWidth || 320) + 'px';
-        placeholder.style.height = (el.offsetHeight || 180) + 'px';
-        placeholder.style.display = 'flex';
+        const placeholder = makeBlockedPlaceholder("video");
+        placeholder.style.width = (el.offsetWidth || 320) + "px";
+        placeholder.style.height = (el.offsetHeight || 180) + "px";
+        placeholder.style.display = "flex";
         el.replaceWith(placeholder);
       }
     });
   }
 
   function processLinks() {
-    document.querySelectorAll('a').forEach(link => {
-      const href = link.href || '';
-      const text = link.textContent || '';
+    document.querySelectorAll("a").forEach((link) => {
+      const href = link.href || "";
+      const text = link.textContent || "";
       if (isTADCUrl(href) || containsTADC(text)) {
-        link.style.display = 'none';
+        link.style.display = "none";
       }
     });
   }
@@ -113,10 +118,11 @@
           const parent = node.parentElement;
           if (!parent) return NodeFilter.FILTER_REJECT;
           const tag = parent.tagName?.toLowerCase();
-          if (['script', 'style', 'noscript', 'head'].includes(tag)) return NodeFilter.FILTER_REJECT;
+          if (["script", "style", "noscript", "head"].includes(tag))
+            return NodeFilter.FILTER_REJECT;
           return NodeFilter.FILTER_ACCEPT;
-        }
-      }
+        },
+      },
     );
     const toReplace = [];
     let node;
@@ -125,7 +131,7 @@
         toReplace.push(node);
       }
     }
-    toReplace.forEach(textNode => {
+    toReplace.forEach((textNode) => {
       const original = textNode.textContent;
       const replaced = replaceKeywordsInText(original);
       if (replaced !== original) {
@@ -136,9 +142,9 @@
 
   function replaceKeywordsInText(text) {
     let result = text;
-    getAllKeywords().forEach(kw => {
-      const regex = new RegExp(kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
-      result = result.replace(regex, '[TADC]');
+    getAllKeywords().forEach((kw) => {
+      const regex = new RegExp(kw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
+      result = result.replace(regex, "[TADC]");
     });
     return result;
   }
@@ -146,7 +152,7 @@
   function checkPageTitle() {
     if (!settings.blockPages) return;
     if (containsTADC(document.title)) {
-      chrome.runtime.sendMessage({ type: 'PAGE_CONTAINS_TADC' });
+      chrome.runtime.sendMessage({ type: "PAGE_CONTAINS_TADC" });
     }
   }
 
@@ -159,7 +165,7 @@
     checkPageTitle();
   }
 
-  chrome.runtime.sendMessage({ type: 'GET_SETTINGS' }, (response) => {
+  chrome.runtime.sendMessage({ type: "GET_SETTINGS" }, (response) => {
     if (response) settings = { ...settings, ...response };
     runAll();
 
@@ -168,7 +174,7 @@
     });
     observer.observe(document.body || document.documentElement, {
       childList: true,
-      subtree: true
+      subtree: true,
     });
   });
 })();
